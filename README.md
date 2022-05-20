@@ -13,15 +13,19 @@ kubernetes and openshift python modules. See `requirements.txt`.
 
 ## Install
 
-$ export LOGITAG=${example}  
+```bash  
+export uuid=${example}`  
 
-$ make  
+make  
+```
 
 ## Manual install
 
-$ oc login https://api.cluster.example.net:6443 --token=${token}
+```bash
+oc login https://api.cluster.example.net:6443 --token=${token}
 
-$ ansible-playbook site.yaml -v --extra-vars "logitag=${example}"
+$ ansible-playbook site.yaml -v -e "uuid=${example}" -e is_prod=false
+```
 
 ## Notes
 
