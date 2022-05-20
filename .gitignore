@@ -1,0 +1,5 @@
+venv
+*.retry
+*.swp
+/test/vars/local/
+/test/openstack.pyc

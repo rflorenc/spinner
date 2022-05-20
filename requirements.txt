@@ -1,0 +1,8 @@
+ansible==2.9.14
+jmespath==0.10.0
+kubernetes
+PyYAML==5.3.1
+openshift
+ansible-lint==4.3.7
+selinux
+setuptools-rust

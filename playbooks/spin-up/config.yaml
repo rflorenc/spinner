@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    uuid: ""
+    is_dev: true
+    is_prod: false
+
+  roles:
+    - { role: openshift-install-dev, when: is_dev|bool}
