@@ -14,7 +14,7 @@ kubernetes and openshift python modules. See `requirements.txt`.
 ## Install
 
 ```bash  
-export uuid=${example}`  
+export uuid=${example} 
 
 make  
 ```

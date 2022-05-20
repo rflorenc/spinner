@@ -11,4 +11,4 @@
 - name: Template openshift-install file in {{ ocp_tmp.path }}
   template:
     src: dev/install-config.j2
-    dest: "{{ ocp_tmp.path }}/install-config-{{ uuid }}.yaml"
+    dest: "{{ ocp_tmp.path }}/install-config.yaml"
