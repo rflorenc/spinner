@@ -12,3 +12,8 @@
   template:
     src: dev/install-config.j2
     dest: "{{ ocp_tmp.path }}/install-config.yaml"
+
+- name: Execute openshift-install
+  command:
+    cmd: "{{ cli_base_dir }}/openshift-install create cluster --dir={{ ocp_tmp.path }}"
+    
