@@ -1,3 +1,3 @@
 ---
-- name: Import spin-up playbook
-  import_playbook: playbooks/spin-up/config.yaml
+- name: Import spinner playbook
+  import_playbook: playbooks/spinner/config.yaml

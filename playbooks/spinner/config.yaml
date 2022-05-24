@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    # if needed, these vars override individual role defaults.
+    # i.e.: roles/$role-name/defaults/main.yaml
+    # they can also be overriden via ansible-playbook --extra-vars 
+    uuid: ""
+    is_dev: true
+    is_prod: false
+    destroy_cluster: false
+    openshift4_release_version: "4.10.5"
+
+  roles:
+    - { role: spinner, when: is_dev|bool}

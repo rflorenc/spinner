@@ -1,0 +1,58 @@
+---
+- name: Create temp ansible working directory
+  ansible.builtin.file:
+    path: "/tmp/{{ uuid }}"
+    state: directory
+    mode: '0755'
+  register: ansible_tmp
+  when: ansible_tmp is not defined or ansible_tmp == ''
+
+- name: Set ansible_tmp fact
+  set_fact:
+    ansible_tmp_path: "{{ ansible_tmp.path }}"
+
+- name: Set cli_base_dir fact
+  set_fact:
+    cli_base_dir: "{{ lookup('env', 'HOME') }}/.local/clis"
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "{{ cli_base_dir }}"
+    state: directory
+    mode: '0755'
+  register: cli_base_dir_result
+
+- name: Download and extract Openshift binaries
+  block:
+    - name: 'Download the OpenShift client'
+      get_url:
+        url: "{{ openshift4_version_map[openshift4_release_version].client_url }}"
+        dest: "{{ cli_base_dir }}/openshift-client-linux.tar.gz"
+        checksum: "{{ openshift4_version_map[openshift4_release_version].client_checksum }}" 
+      retries: 5
+      delay: 120
+      register: download_client_result
+      until: download_client_result.failed | bool == false
+
+    - name: 'Download the OpenShift installer'
+      get_url:
+        url: "{{ openshift4_version_map[openshift4_release_version].install_url }}"
+        dest: "{{ cli_base_dir }}/openshift-installer-linux.tar.gz"
+        checksum: "{{ openshift4_version_map[openshift4_release_version].install_checksum }}"
+      retries: 5
+      delay: 120
+      register: download_installer_result
+      until: download_installer_result.failed | bool == false
+
+    - name: 'Unarchive the OpenShift client'
+      unarchive:
+        src: "{{ cli_base_dir }}/openshift-client-linux.tar.gz"
+        dest: "{{ cli_base_dir }}"
+        remote_src: yes
+
+    - name: 'Unarchive the OpenShift installer'
+      unarchive:
+        src: "{{ cli_base_dir }}/openshift-installer-linux.tar.gz"
+        dest: "{{ cli_base_dir }}"
+        remote_src: yes
+  when: cli_base_dir_result.changed | bool

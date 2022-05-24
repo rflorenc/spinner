@@ -1,5 +1,7 @@
 venv
+hack
 *.retry
 *.swp
 /test/vars/local/
 /test/openstack.pyc
+.openshift_install.log

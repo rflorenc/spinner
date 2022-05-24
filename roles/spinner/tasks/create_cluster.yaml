@@ -1,0 +1,25 @@
+- name: DEV debug test vars
+  debug:
+    msg: "Dev openshift4_release_version is {{ openshift4_release_version }}"
+
+- name: debug openshift4_version_map
+  debug:
+    msg: "{{ openshift4_version_map[openshift4_release_version].client_url }}"
+
+- name: debug base_domain
+  debug:
+    msg: "{{ base_domain }}"
+
+- name: Template openshift-install file in {{ ansible_tmp_path }}
+  template:
+    src: dev/install-config.j2
+    dest: "{{ ansible_tmp_path }}/install-config.yaml"
+
+- name: Backup install-config.yaml
+  ansible.builtin.copy:
+    src: "{{ ansible_tmp_path }}/install-config.yaml"
+    dest: "{{ ansible_tmp_path }}/install-config.yaml.orig"
+    
+- name: Execute openshift-install create cluster
+  command:
+    cmd: "{{ cli_base_dir }}/openshift-install create cluster --dir={{ ansible_tmp_path }}"

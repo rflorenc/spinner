@@ -1,0 +1,8 @@
+---
+  - import_tasks: prereqs.yaml
+  
+  - import_tasks: create_cluster.yaml
+    when: not destroy_cluster|bool
+
+  - import_tasks: destroy_cluster.yaml
+    when: destroy_cluster|bool
