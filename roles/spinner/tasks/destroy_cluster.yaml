@@ -1,0 +1,7 @@
+- name: debug destroy cluster
+  debug:
+    msg: "destroy cluster is {{ destroy_cluster }}"
+
+- name: Execute openshift-install destroy cluster 
+  command:
+    cmd: "{{ cli_base_dir }}/openshift-install destroy cluster --dir={{ ansible_tmp_path }}"

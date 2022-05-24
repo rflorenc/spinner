@@ -21,8 +21,8 @@ clean: venv-clean
 # prepare the base python3 virtualenv
 venv:
 	$(PY) -m venv --prompt logispin $(VENVDIR)
-	$(VENV)/pip install --upgrade pip
-	$(VENV)/pip install -Ur requirements.txt pip
+	$(VENV)/pip install --upgrade pip --quiet
+	$(VENV)/pip install -Ur requirements.txt pip --quiet
 
 venv-clean:
 	rm -fr $(VENVDIR)

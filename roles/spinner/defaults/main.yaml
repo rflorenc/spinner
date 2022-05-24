@@ -1,7 +1,6 @@
 # User-provided values
 os_cloud: 'spin'
-
-pull_secret: 'testabcxyz'
+os_cluster_name: 'dev'
 
 os_subnet_range: '10.0.0.0/16'
 os_flavor_master: 'm1.xlarge'
@@ -45,6 +44,7 @@ os_api_fip: '203.0.113.23'
 # OpenShift Ingress floating IP address. If this value is non-empty, the
 # corresponding floating IP will be attached to the worker nodes to serve
 # the applications.
+# os_external_network should also be present when defining os_ingress_fip.
 os_ingress_fip: '203.0.113.19'
 
 # If this value is non-empty, the corresponding floating IP will be
