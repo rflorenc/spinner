@@ -14,7 +14,10 @@ VENV=$(VENVDIR)/bin
 default: install
 
 install: venv
-	$(VENV)/ansible-playbook site.yaml -vv -e "uuid=${uuid}" -e is_prod=false
+	$(VENV)/ansible-playbook site.yaml -v -e "uuid=${uuid}" -e is_prod=false
+
+destroy: venv
+	$(VENV)/ansible-playbook site.yaml -v -e "uuid=${uuid}" -e is_prod=false -e destroy_cluster=true
 
 clean: venv-clean
 

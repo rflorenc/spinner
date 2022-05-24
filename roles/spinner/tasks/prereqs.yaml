@@ -1,7 +1,9 @@
 ---
 - name: Create temp ansible working directory
-  tempfile:
+  ansible.builtin.file:
+    path: "/tmp/{{ uuid }}"
     state: directory
+    mode: '0755'
   register: ansible_tmp
   when: ansible_tmp is not defined or ansible_tmp == ''
 
