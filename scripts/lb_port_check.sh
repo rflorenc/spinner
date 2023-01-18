@@ -18,15 +18,15 @@ port_check() {
   then
     endpoint="foo.${APP_DOMAIN}"
   else
-    echo "Something went horribly wrong !!!"
+    echo "Unrecognized endpoint"
     exit 1
   fi
   nc -zv ${endpoint} ${port} 2>1 > /dev/null
   if [ $? -eq 1 ]
   then
-    echo "${endpoint} ${port} => NOT working !!!"
+    echo "${endpoint} ${port} => ERR"
   else
-    echo "${endpoint} ${port} => working OK"
+    echo "${endpoint} ${port} => OK"
   fi
 }
 
